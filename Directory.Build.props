@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Set some very basic properties -->
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <!-- This project file only imports other project files. -->
+  <!-- Layout changes are really unreliable when late-bound in targets, unfortunately. -->
+  <Import
+    Project="$(MSBuildThisFileDirectory)Directory.Build/Solution.Build.Layout$(MSBuildThisFileExtension)"
+    Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build/Solution.Build.Layout$(MSBuildThisFileExtension)')" />
+  <Import
+    Project="$(MSBuildThisFileDirectory)Directory.Build/MetaprojectLayout.props"
+    Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build/MetaprojectLayout.props" />
+  <Import
+    Project="$(MSBuildThisFileDirectory)Directory.Build/props.d/*.props"
+    Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build/props.d')" />
+  <Import
+    Project="$(MSBuildThisFileDirectory)Directory.Build/Solution.Build$(MSBuildThisFileExtension)"
+    Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build/Solution.Build$(MSBuildThisFileExtension)')" />
+  <Import
+    Project="$(MSBuildThisFileDirectory)Directory.Build/props.d/*.props.user"
+    Condition="Exists('$(MSBuildThisFileDirectory)Directory.Build')/props.d" />
+</Project>
